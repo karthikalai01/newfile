@@ -1,0 +1,72 @@
+package com.maven.FirstProject;
+
+
+	import java.io.File;
+
+	import org.apache.commons.io.FileUtils;
+	import org.openqa.selenium.By;
+	import org.openqa.selenium.JavascriptExecutor;
+	import org.openqa.selenium.OutputType;
+	import org.openqa.selenium.TakesScreenshot;
+	import org.openqa.selenium.WebDriver;
+	import org.openqa.selenium.WebElement;
+	import org.openqa.selenium.chrome.ChromeDriver;
+	import org.openqa.selenium.interactions.Actions;
+
+	public class Mini_Project {
+		public static void main(String[] args) throws Throwable {
+			System.setProperty("webdriver.chrome.driver","C:\\\\Users\\\\elcot\\\\.eclipse\\\\Documents\\\\selenium\\\\Selenium\\\\Driver\\\\chromedriver.exe");
+		    WebDriver driver=new ChromeDriver();
+		    driver.get("http://automationpractice.com/");
+		    driver.manage().window().maximize();
+		    WebElement tshirts = driver.findElement(By.xpath("(//a[text()='T-shirts'])[2]"));
+		    tshirts.click();
+		    Thread.sleep(3000);
+		    JavascriptExecutor jd=(JavascriptExecutor) driver;
+		    WebElement findout = driver.findElement(By.xpath("//span[text()='Condition']"));	    
+		    jd.executeScript("arguments[0].scrollIntoView();", findout);
+		    WebElement price = driver.findElement(By.xpath("(//span[@class='price product-price'])[2]"));
+		    Actions ac=new Actions(driver);
+		    ac.moveToElement(price).build().perform();
+		    WebElement addtocart = driver.findElement(By.xpath("//span[text()='Add to cart']"));
+		    addtocart.click();
+		    Thread.sleep(7000);
+		  
+		    WebElement proceed1 = driver.findElement(By.xpath("/html/body/div/div[1]/header/div/div/div [1]/div[4]/div/div[2]/div[4]/a"));
+		    proceed1.click();
+		    WebElement proceed2 = driver.findElement(By.xpath("//span[text()='Proceed to checkout']"));
+		    proceed2.click();
+		    WebElement email = driver.findElement(By.id("email"));
+		    email.sendKeys("Karthi321@gmail.com");
+		    WebElement passwrd = driver.findElement(By.id("passwd"));
+		    passwrd.sendKeys("karthi@123");
+		    WebElement sign = driver.findElement(By.xpath("//i[@class='icon-lock left']"));
+		    sign.click();
+		    Thread.sleep(4000);
+		    WebElement proceed3 = driver.findElement(By.xpath("//span[text()='Proceed to checkout']"));
+		    proceed3.click();
+		    Thread.sleep(4000);
+		    WebElement agree = driver.findElement(By.id("cgv"));
+		    agree.click();
+		    WebElement proceed4 = driver.findElement(By.xpath("(//i[@class='icon-chevron-right right'])[3]"));
+		    proceed4.click();
+		    Thread.sleep(4000);
+		    WebElement bank = driver.findElement(By.xpath("//a[@class='cheque']"));
+		    bank.click();
+		    Thread.sleep(4000);
+		    WebElement proceed5 = driver.findElement(By.xpath("//span[text()='I confirm my order']"));
+		    proceed5.click();
+		    Thread.sleep(4000);
+		    TakesScreenshot s=(TakesScreenshot) driver;
+			   File Snap = s.getScreenshotAs(OutputType.FILE);
+			   File destination=new File("C:\\Users\\elcot\\Desktop\\MavenProject\\FirstProject\\ScreenShot\\project.png");
+			   FileUtils.copyFile(Snap, destination);
+			
+		    
+		
+		
+		}
+		}
+
+
+
